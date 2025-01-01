@@ -1,0 +1,14 @@
+{
+  "name": "sha256_hasher",
+  "version": "1.1.0",
+  "description": "hash something using sha256",
+  "main": "script.js",
+  "scripts": {
+    "build": "tsc && rename script.js compiled.js"
+  },
+  "author": "solitaire83",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^22.10.3"
+  }
+}
