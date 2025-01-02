@@ -18,7 +18,8 @@ export function start() {
                 }
 
                 console.log(`Ready to hash with ${saltsize} bytes saltsize, ${keysize} bytes keysize and ${iterations} iterations.`);
-                prompt(rl, saltsize, keysize, iterations);
+                rl.close();
+                prompt(saltsize, keysize, iterations);
             });
         });
     });

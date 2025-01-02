@@ -1,4 +1,5 @@
 import * as readline from 'readline';
+import { start } from './start';
 
 export function createprompt(): readline.Interface {
     return readline.createInterface({
@@ -11,17 +12,31 @@ export function dialog(rl: readline.Interface, query: string, callback: (answer:
     rl.question(query, (answer) => {
         if(answer.trim().toLowerCase() === 'exit') {
             rl.close();
+        } else if(answer.trim().toLowerCase() === 'restart') {
+            rl.close();
+            console.log('\x1b[32m%s\x1b[0m', 'The application had been restarted! :*');
+            start();
         } else {
             callback(answer);
         }
     });
 }
 
-export function prompt(rl: readline.Interface, saltsize: number, keysize: number, iterations: number): void {
+export function prompt(saltsize: number, keysize: number, iterations: number): void {
+    const rl = createprompt();
     rl.question('Enter something to be hashed: ', (input) => {
-        if(input.trim().toLowerCase() === 'exit') return rl.close();
+        const cmd = input.trim().toLowerCase();
+        if(cmd === 'exit') return rl.close();
+        if(cmd === 'restart') {
+            rl.close();
+            console.log('\x1b[32m%s\x1b[0m', 'The application had been restarted! :*');
+            start();
+            return;
+        }
+
         const { hash } = require('./hash');
         hash(input, saltsize, keysize, iterations);
-        prompt(rl, saltsize, keysize, iterations);
+        rl.close();
+        prompt(saltsize, keysize, iterations);
     });
 }
