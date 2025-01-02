@@ -1,5 +1,5 @@
 import * as readline from 'readline';
-import { start } from './start';
+import { cmds } from '../utils/cmdhandler';
 
 export function createprompt(): readline.Interface {
     return readline.createInterface({
@@ -10,13 +10,7 @@ export function createprompt(): readline.Interface {
 
 export function dialog(rl: readline.Interface, query: string, callback: (answer: string) => void): void {
     rl.question(query, (answer) => {
-        if(answer.trim().toLowerCase() === 'exit') {
-            rl.close();
-        } else if(answer.trim().toLowerCase() === 'restart') {
-            rl.close();
-            console.log('\x1b[32m%s\x1b[0m', 'The application had been restarted! :*');
-            start();
-        } else {
+        if(!cmds(answer.trim().toLowerCase(), rl)) {
             callback(answer);
         }
     });
@@ -26,17 +20,11 @@ export function prompt(saltsize: number, keysize: number, iterations: number): v
     const rl = createprompt();
     rl.question('Enter something to be hashed: ', (input) => {
         const cmd = input.trim().toLowerCase();
-        if(cmd === 'exit') return rl.close();
-        if(cmd === 'restart') {
+        if(!cmds(cmd, rl)) {
+            const { hash } = require('./hash');
+            hash(input, saltsize, keysize, iterations);
             rl.close();
-            console.log('\x1b[32m%s\x1b[0m', 'The application had been restarted! :*');
-            start();
-            return;
+            prompt(saltsize, keysize, iterations);
         }
-
-        const { hash } = require('./hash');
-        hash(input, saltsize, keysize, iterations);
-        rl.close();
-        prompt(saltsize, keysize, iterations);
     });
 }
