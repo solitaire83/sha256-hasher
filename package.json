@@ -1,6 +1,6 @@
 {
   "name": "sha256_hasher",
-  "version": "1.5.0",
+  "version": "1.9.1",
   "description": "hash something using sha256",
   "main": "script.js",
   "scripts": {
