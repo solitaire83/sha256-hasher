@@ -7,9 +7,9 @@ export function createprompt(): readline.Interface {
     });
 }
 
-export function questionuser(rl: readline.Interface, query: string, callback: (answer: string) => void): void {
+export function dialog(rl: readline.Interface, query: string, callback: (answer: string) => void): void {
     rl.question(query, (answer) => {
-        if (answer.trim().toLowerCase() === 'exit') {
+        if(answer.trim().toLowerCase() === 'exit') {
             rl.close();
         } else {
             callback(answer);
@@ -19,7 +19,7 @@ export function questionuser(rl: readline.Interface, query: string, callback: (a
 
 export function prompt(rl: readline.Interface, saltsize: number, keysize: number, iterations: number): void {
     rl.question('Enter something to be hashed: ', (input) => {
-        if (input.trim().toLowerCase() === 'exit') return rl.close();
+        if(input.trim().toLowerCase() === 'exit') return rl.close();
         const { hash } = require('./hash');
         hash(input, saltsize, keysize, iterations);
         prompt(rl, saltsize, keysize, iterations);
