@@ -3,6 +3,8 @@
 ## Overview
 SHA256 Hasher is a simple application that allows you to generate SHA256 hashes for any given input. This can be useful for verifying data integrity, storing passwords securely, and more.
 
+**basically, just me training myself on typescript XD**
+
 ## Features
 - Generate SHA256 hashes from text input
 - Easy-to-use interface
@@ -24,7 +26,7 @@ To install the SHA256 Hasher, follow these steps:
     ```
 
 ## Usage
-To use the SHA256 Hasher, run the following commands (in order):
+If you have installed all the necessary dependencies, run the following commands (in order):
 ```bash
 npm run build
 npm run start
@@ -33,7 +35,7 @@ Then, follow the on-screen instructions to input the text you want to hash.
 
 
 ## License
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](https://github.com/solitaire83/sha256-hasher/blob/master/LICENSE) file for details.
 
 ## Contact
 For any questions or feedback, please open an issue on the [GitHub repository](https://github.com/solitaire83/sha256-hasher).
